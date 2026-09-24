@@ -1,0 +1,556 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: auth
+    description: Authenticated account bootstrap
+  - name: portfolio
+    description: User portfolio data
+  - name: funding
+    description: Deposit and withdrawal requests
+  - name: notifications
+    description: User notifications
+  - name: admin
+    description: Protected administrative operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /auth/user:
+    get:
+      operationId: getCurrentUser
+      tags: [auth]
+      summary: Get the authenticated user
+      responses:
+        "200":
+          description: Authenticated user and profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CurrentUser"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [portfolio]
+      summary: Get the authenticated dashboard
+      responses:
+        "200":
+          description: Database-backed portfolio overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /profile:
+    patch:
+      operationId: updateProfile
+      tags: [auth]
+      summary: Update the authenticated profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProfileUpdate"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /kyc:
+    get:
+      operationId: getKycStatus
+      tags: [auth]
+      summary: Get current KYC status
+      responses:
+        "200":
+          description: Current KYC status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KycStatus"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: submitKyc
+      tags: [auth]
+      summary: Submit KYC information for review
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KycSubmission"
+      responses:
+        "201":
+          description: KYC submission accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KycStatus"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /portfolios:
+    get:
+      operationId: listPortfolios
+      tags: [portfolio]
+      summary: List the authenticated user's portfolios
+      responses:
+        "200":
+          description: User portfolios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Portfolio"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /transactions:
+    get:
+      operationId: listTransactions
+      tags: [portfolio]
+      summary: List the authenticated user's transactions
+      responses:
+        "200":
+          description: User transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Transaction"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /funding-requests:
+    get:
+      operationId: listFundingRequests
+      tags: [funding]
+      summary: List the authenticated user's funding requests
+      responses:
+        "200":
+          description: Deposit and withdrawal requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FundingRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /funding-requests/deposit:
+    post:
+      operationId: createDepositRequest
+      tags: [funding]
+      summary: Create a Stripe-backed deposit request
+      description: >
+        Disabled by default. This endpoint must remain unavailable until
+        Vaultora's legal, banking, payment, and compliance release gates are
+        explicitly approved.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FundingRequestInput"
+      responses:
+        "201":
+          description: Deposit request and payment intent details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DepositIntent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/CapabilityDisabled"
+  /funding-requests/withdrawal:
+    post:
+      operationId: createWithdrawalRequest
+      tags: [funding]
+      summary: Create a withdrawal request for review
+      description: >
+        Disabled by default. This endpoint must remain unavailable until
+        Vaultora's legal, banking, payment, and compliance release gates are
+        explicitly approved.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FundingRequestInput"
+      responses:
+        "201":
+          description: Pending withdrawal request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FundingRequest"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/CapabilityDisabled"
+  /notifications:
+    get:
+      operationId: listNotifications
+      tags: [notifications]
+      summary: List the authenticated user's notifications
+      responses:
+        "200":
+          description: User notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Notification"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /notifications/{id}/read:
+    post:
+      operationId: markNotificationRead
+      tags: [notifications]
+      summary: Mark a notification as read
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Updated notification
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Notification"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /admin/funding-requests:
+    get:
+      operationId: listAdminFundingRequests
+      tags: [admin]
+      summary: List funding requests for administrators
+      responses:
+        "200":
+          description: Funding requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FundingRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /admin/funding-requests/{id}:
+    patch:
+      operationId: reviewFundingRequest
+      tags: [admin]
+      summary: Review a funding request
+      description: >
+        Disabled by default. Administrative review cannot approve funding
+        while the funding capability is disabled.
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FundingReview"
+      responses:
+        "200":
+          description: Reviewed funding request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FundingRequest"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/CapabilityDisabled"
+  /admin/audit-logs:
+    get:
+      operationId: listAuditLogs
+      tags: [admin]
+      summary: List immutable audit log records
+      responses:
+        "200":
+          description: Audit log records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AuditLog"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Forbidden:
+      description: Administrator access required
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    BadRequest:
+      description: Request validation failed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    CapabilityDisabled:
+      description: Capability is disabled by a release or compliance gate
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        requestId:
+          type: string
+    CurrentUser:
+      type: object
+      required: [user, profile, kyc]
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        profile:
+          $ref: "#/components/schemas/Profile"
+        kyc:
+          $ref: "#/components/schemas/KycStatus"
+    Dashboard:
+      type: object
+      required: [user, portfolio, holdings, transactions, fundingRequests, notifications]
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        profile:
+          $ref: "#/components/schemas/Profile"
+        kyc:
+          $ref: "#/components/schemas/KycStatus"
+        portfolio:
+          $ref: "#/components/schemas/Portfolio"
+        holdings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Holding"
+        transactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transaction"
+        fundingRequests:
+          type: array
+          items:
+            $ref: "#/components/schemas/FundingRequest"
+        notifications:
+          type: array
+          items:
+            $ref: "#/components/schemas/Notification"
+        cashBalance:
+          type: number
+        portfolioValue:
+          type: number
+    Holding:
+      type: object
+      required: [id, symbol, name, assetType, quantity, averageCost, currentPrice]
+      properties:
+        id: { type: string }
+        symbol: { type: string }
+        name: { type: string }
+        assetType: { type: string }
+        quantity: { type: number }
+        averageCost: { type: number }
+        currentPrice: { type: number }
+        marketValue: { type: number }
+    User:
+      type: object
+      required: [id, role, createdAt]
+      properties:
+        id: { type: string }
+        email: { type: ["string", "null"] }
+        firstName: { type: ["string", "null"] }
+        lastName: { type: ["string", "null"] }
+        role: { type: string }
+        createdAt: { type: string, format: date-time }
+    Profile:
+      type: object
+      required: [userId, baseCurrency]
+      properties:
+        userId: { type: string }
+        phone: { type: ["string", "null"] }
+        baseCurrency: { type: string }
+        riskProfile: { type: ["string", "null"] }
+        address: { type: ["object", "null"], additionalProperties: true }
+    ProfileUpdate:
+      type: object
+      properties:
+        phone: { type: string }
+        baseCurrency: { type: string, minLength: 3, maxLength: 3 }
+        riskProfile: { type: string }
+        address: { type: object, additionalProperties: true }
+    KycStatus:
+      type: object
+      required: [id, userId, status]
+      properties:
+        id: { type: string }
+        userId: { type: string }
+        status: { type: string }
+        provider: { type: ["string", "null"] }
+        submittedAt: { type: ["string", "null"], format: date-time }
+        reviewedAt: { type: ["string", "null"], format: date-time }
+        reviewNote: { type: ["string", "null"] }
+    KycSubmission:
+      type: object
+      required: [fullName, dateOfBirth, country]
+      properties:
+        fullName: { type: string, minLength: 2 }
+        dateOfBirth: { type: string, format: date }
+        country: { type: string, minLength: 2, maxLength: 2 }
+    Portfolio:
+      type: object
+      required: [id, userId, name, baseCurrency, status]
+      properties:
+        id: { type: string }
+        userId: { type: string }
+        name: { type: string }
+        baseCurrency: { type: string }
+        status: { type: string }
+        balance: { type: number }
+    Transaction:
+      type: object
+      required: [id, type, status, amount, currency, createdAt]
+      properties:
+        id: { type: string }
+        type: { type: string }
+        status: { type: string }
+        amount: { type: number }
+        currency: { type: string }
+        description: { type: ["string", "null"] }
+        createdAt: { type: string, format: date-time }
+    FundingRequest:
+      type: object
+      required: [id, type, status, amount, currency, createdAt]
+      properties:
+        id: { type: string }
+        type: { type: string }
+        status: { type: string }
+        amount: { type: number }
+        currency: { type: string }
+        stripePaymentIntentId: { type: ["string", "null"] }
+        reviewNote: { type: ["string", "null"] }
+        createdAt: { type: string, format: date-time }
+    FundingRequestInput:
+      type: object
+      required: [amount, currency]
+      properties:
+        amount: { type: number, exclusiveMinimum: 0 }
+        currency: { type: string, minLength: 3, maxLength: 3 }
+    DepositIntent:
+      type: object
+      required: [requestId, clientSecret, status]
+      properties:
+        requestId: { type: string }
+        clientSecret: { type: string }
+        publishableKey: { type: ["string", "null"] }
+        status: { type: string }
+    FundingReview:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string }
+        reviewNote: { type: string }
+    Notification:
+      type: object
+      required: [id, type, title, body, createdAt]
+      properties:
+        id: { type: string }
+        type: { type: string }
+        title: { type: string }
+        body: { type: string }
+        readAt: { type: ["string", "null"], format: date-time }
+        createdAt: { type: string, format: date-time }
+    AuditLog:
+      type: object
+      required: [id, action, entityType, createdAt]
+      properties:
+        id: { type: string }
+        actorUserId: { type: ["string", "null"] }
+        action: { type: string }
+        entityType: { type: string }
+        entityId: { type: ["string", "null"] }
+        metadata: { type: ["object", "null"], additionalProperties: true }
+        createdAt: { type: string, format: date-time }
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+

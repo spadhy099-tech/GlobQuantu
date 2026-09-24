@@ -1,0 +1,1 @@
+- [Stripe Sync migrations](stripe-sync-migrations.md) — keep migration-loading packages external to the API bundle when they resolve SQL assets relative to their installed module.

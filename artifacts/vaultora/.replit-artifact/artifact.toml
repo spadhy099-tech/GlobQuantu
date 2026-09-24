@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Vaultora"
+description = "A responsive Vaultora financial portfolio workspace with Clerk authentication, database-backed account records, server-verified funding, portfolio views, notifications, and protected operations."
+version = "1.0.0"
+id = "artifacts/vaultora"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20101
+
+[services.development]
+run = "pnpm --filter @workspace/vaultora run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vaultora", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/vaultora/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20101"
+BASE_PATH = "/"
