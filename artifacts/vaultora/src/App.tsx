@@ -168,7 +168,7 @@ function Landing() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="panel rounded-2xl p-6"><LockKeyhole className="text-positive" size={20} /><h3 className="mt-7 text-lg font-semibold">Private account layer</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Clerk authentication and a server-backed dashboard keep your workspace tied to your account.</p></div>
               <div className="panel rounded-2xl p-6"><FileCheck2 className="text-warm" size={20} /><h3 className="mt-7 text-lg font-semibold">Readiness first</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Identity and account checks are presented as a process, not a promise of access or service.</p></div>
-              <div className="panel rounded-2xl p-6 sm:col-span-2"><Scale className="text-[hsl(188_48%_70%)]" size={20} /><h3 className="mt-7 text-lg font-semibold">Information, not advice</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground"GlobQuantu is not a trading app, broker, adviser, or offer to invest. Explore our approach to investing information, risk, and security before creating an account.</p></div>
+              <div className="panel rounded-2xl p-6 sm:col-span-2"><Scale className="text-[hsl(188_48%_70%)]" size={20} /><h3 className="mt-7 text-lg font-semibold">Information, not advice</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">GlobQuantu is not a trading app, broker, adviser, or offer to invest.Explore our approach to investing information, risk, and security before creating an account.</p></div>
             </div>
           </div>
         </section>
