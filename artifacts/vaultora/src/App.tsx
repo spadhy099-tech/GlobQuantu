@@ -116,14 +116,14 @@ function Landing() {
                 Clarity for the wealth you already hold.
               </h1>
               <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-                Vaultora is a calm, account-backed workspace for seeing your portfolio, preparing your account, and keeping a precise record of activity.
+                GlobQuantu is a calm, account-backed workspace for seeing your portfolio, preparing your account, and keeping a precise record of activity.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Link href="/sign-up" data-testid="link-create-account" className="primary-button inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground">
                   Create a private account <ArrowRight size={16} />
                 </Link>
                 <Link href="/investing" data-testid="link-explore-investing" className="soft-button inline-flex items-center justify-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-muted-foreground">
-                  How Vaultora works
+                  How GlobQuantu works
                 </Link>
               </div>
               <p className="mt-5 max-w-xl text-xs leading-6 text-muted-foreground">
@@ -191,7 +191,7 @@ function PublicHeader() {
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between">
         <Link href="/" data-testid="link-vaultora-home" className="flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Landmark size={18} strokeWidth={2.4} /></span>
-          <span><span className="block text-[1.05rem] font-bold tracking-[-.04em]">vaultora</span><span className="mono hidden text-[.54rem] uppercase tracking-[.17em] text-muted-foreground sm:block">private wealth workspace</span></span>
+          <span><span className="block text-[1.05rem] font-bold tracking-[-.04em]">GlobQuantu</span><span className="mono hidden text-[.54rem] uppercase tracking-[.17em] text-muted-foreground sm:block">private wealth workspace</span></span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Public navigation">
           <Link href="/investing" data-testid="link-nav-investing" className="public-nav-link">Investing information</Link>
