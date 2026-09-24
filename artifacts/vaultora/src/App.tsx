@@ -220,7 +220,7 @@ function PublicInfoPage({ kind }: { kind: PublicPageKind }) {
     investing: {
       eyebrow: "Investing information",
       title: "A clearer place to understand your investment context.",
-      intro: "Vaultora is designed to organize account information and help you read what is recorded. It does not provide investment advice, execute trades, or make an offer to invest.",
+      intro: "GlobQuantu is designed to organize account information and help you read what is recorded. It does not provide investment advice, execute trades, or make an offer to invest.",
       icon: BookOpen,
       sections: [
         ["What you can expect", "A private workspace for portfolio records, account readiness, and activity when those records exist. The dashboard shows stored data; it does not manufacture a performance story."],
