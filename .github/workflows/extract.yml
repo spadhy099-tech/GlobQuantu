@@ -16,19 +16,18 @@ jobs:
 
       - name: Extract project
         run: |
-          mkdir -p /tmp/globquantu
           unzip -q GlobQuantu.zip -d /tmp/globquantu
-          rsync -a --exclude='.git/' /tmp/globquantu/GlobQuantu/ ./
-          rm -rf .git
-          git init
-          git remote add origin "https://github.com/${{ github.repository }}.git"
-          git fetch origin main
-          git checkout -B main FETCH_HEAD
+          if [ -d /tmp/globquantu/GlobQuantu ]; then
+            rsync -a --exclude='.git/' /tmp/globquantu/GlobQuantu/ ./
+          else
+            rsync -a --exclude='.git/' /tmp/globquantu/ ./
+          fi
+          rm -f GlobQuantu.zip
 
       - name: Commit extracted files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git rm --cached GlobQuantu.zip || true
-          rm -f GlobQuantu.
+          git commit -m "Extract GlobQuantu project" || echo "No changes to commit"
+          git push
