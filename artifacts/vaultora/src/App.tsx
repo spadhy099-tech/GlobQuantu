@@ -235,14 +235,14 @@ function PublicInfoPage({ kind }: { kind: PublicPageKind }) {
       icon: Scale,
       sections: [
         ["Risk belongs in the decision", "Market, liquidity, credit, operational, tax, currency, and other risks can affect an investment. The right level of risk depends on a person’s circumstances, objectives, and capacity for loss."],
-        ["No suitability determination", "Creating a Vaultora account does not mean that any investment, strategy, or service is suitable for you. We do not use registration to make an investment recommendation."],
+        ["No suitability determination", "Creating a GlobQuantu account does not mean that any investment, strategy, or service is suitable for you. We do not use registration to make an investment recommendation."],
         ["Read the record carefully", "Account balances and activity are only meaningful when they are sourced from the underlying records. Ask questions when information is incomplete or unclear."],
       ],
     },
     security: {
       eyebrow: "Security and privacy",
       title: "Security is a system of careful boundaries.",
-      intro: "Vaultora uses Clerk for authentication and an authenticated, database-backed workspace for account information. We are building the controls and review processes required for a responsible financial product.",
+      intro: "GlobQuantu uses Clerk for authentication and an authenticated, database-backed workspace for account information. We are building the controls and review processes required for a responsible financial product.",
       icon: LockKeyhole,
       sections: [
         ["Account access", "Registration and sign-in are handled through Clerk. Your workspace is only available to an authenticated account, and dashboard information is requested with session credentials."],
@@ -585,11 +585,11 @@ function AdminPanel() {
   }
 
   if (!isSignedIn) {
-    return <div className="vaultora-shell flex min-h-[100dvh] items-center justify-center text-sm text-muted-foreground">Authentication required.</div>;
+    return <div className="GlobQuantu-shell flex min-h-[100dvh] items-center justify-center text-sm text-muted-foreground">Authentication required.</div>;
   }
 
   return (
-    <div className="vaultora-shell min-h-[100dvh] px-5 py-8 text-foreground sm:px-8 lg:px-12">
+    <div className="GlobQuantu-shell min-h-[100dvh] px-5 py-8 text-foreground sm:px-8 lg:px-12">
       <div className="mx-auto max-w-6xl">
         <div className="mb-7 flex items-end justify-between gap-4">
           <div>
@@ -625,11 +625,11 @@ function HomeRedirect() {
 }
 
 function SignInPage() {
-  return <div className="vaultora-shell flex min-h-[100dvh] items-center justify-center px-4"><SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up`} /></div>;
+  return <div className="GlobQuantu-shell flex min-h-[100dvh] items-center justify-center px-4"><SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up`} /></div>;
 }
 
 function SignUpPage() {
-  return <div className="vaultora-shell flex min-h-[100dvh] items-center justify-center px-4"><SignUp routing="path" path={`${basePath}/sign-up`} signInUrl={`${basePath}/sign-in`} /></div>;
+  return <div className="GlobQuantu-shell flex min-h-[100dvh] items-center justify-center px-4"><SignUp routing="path" path={`${basePath}/sign-up`} signInUrl={`${basePath}/sign-in`} /></div>;
 }
 
 function ClerkProviderWithRoutes() {
