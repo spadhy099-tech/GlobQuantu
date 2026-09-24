@@ -105,7 +105,7 @@ function formatDate(value: string | Date | undefined) {
 
 function Landing() {
   return (
-    <div className="vaultora-shell min-h-[100dvh] overflow-hidden">
+    <div className="GlobQuantu-shell min-h-[100dvh] overflow-hidden">
       <PublicHeader />
       <main>
         <section className="public-hero mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:px-12 lg:pb-28">
@@ -130,7 +130,7 @@ function Landing() {
                 Creating an account does not accept money. Funding is unavailable while our business model, licensing, and compliance review are underway.
               </p>
             </div>
-            <div className="hero-blueprint panel tiny-grid relative overflow-hidden rounded-3xl p-5 sm:p-7 reveal-2" aria-label="Vaultora account workspace preview">
+            <div className="hero-blueprint panel tiny-grid relative overflow-hidden rounded-3xl p-5 sm:p-7 reveal-2" aria-label="GlobQuantu account workspace preview">
               <div className="absolute right-6 top-6 flex items-center gap-2 rounded-full border border-[hsl(var(--primary)/.22)] bg-[hsl(var(--primary)/.07)] px-3 py-1.5 text-[.62rem] font-semibold text-positive"><span className="pulse h-1.5 w-1.5 rounded-full bg-primary" />Account-backed view</div>
               <div className="mt-12 border-b border-border pb-5">
                 <p className="label">Workspace signal</p>
@@ -143,7 +143,7 @@ function Landing() {
                 <div className="panel-soft rounded-xl p-4"><p className="label">Records</p><p className="mt-2 text-sm font-semibold">Server verified</p></div>
                 <div className="panel-soft rounded-xl p-4"><p className="label">Funding</p><p className="mt-2 text-sm font-semibold text-warm">Not available</p></div>
               </div>
-              <div className="mt-3 flex items-center justify-between border-t border-border pt-4 text-[.68rem] text-muted-foreground"><span className="mono">VAULTORA / 01</span><span>No simulated values</span></div>
+              <div className="mt-3 flex items-center justify-between border-t border-border pt-4 text-[.68rem] text-muted-foreground"><span className="mono">GlobQuantu / 01</span><span>No simulated values</span></div>
             </div>
           </div>
         </section>
@@ -168,7 +168,7 @@ function Landing() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="panel rounded-2xl p-6"><LockKeyhole className="text-positive" size={20} /><h3 className="mt-7 text-lg font-semibold">Private account layer</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Clerk authentication and a server-backed dashboard keep your workspace tied to your account.</p></div>
               <div className="panel rounded-2xl p-6"><FileCheck2 className="text-warm" size={20} /><h3 className="mt-7 text-lg font-semibold">Readiness first</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Identity and account checks are presented as a process, not a promise of access or service.</p></div>
-              <div className="panel rounded-2xl p-6 sm:col-span-2"><Scale className="text-[hsl(188_48%_70%)]" size={20} /><h3 className="mt-7 text-lg font-semibold">Information, not advice</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Vaultora is not a trading app, broker, adviser, or offer to invest. Explore our approach to investing information, risk, and security before creating an account.</p></div>
+              <div className="panel rounded-2xl p-6 sm:col-span-2"><Scale className="text-[hsl(188_48%_70%)]" size={20} /><h3 className="mt-7 text-lg font-semibold">Information, not advice</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground"GlobQuantu is not a trading app, broker, adviser, or offer to invest. Explore our approach to investing information, risk, and security before creating an account.</p></div>
             </div>
           </div>
         </section>
@@ -189,7 +189,7 @@ function PublicHeader() {
   return (
     <header className="public-header sticky top-0 z-20 border-b border-border/80 bg-[hsl(221_48%_8%/.86)] px-5 backdrop-blur-xl sm:px-8 lg:px-12">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between">
-        <Link href="/" data-testid="link-vaultora-home" className="flex items-center gap-3">
+        <Link href="/" data-testid="link-GlobQuantu-home" className="flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Landmark size={18} strokeWidth={2.4} /></span>
           <span><span className="block text-[1.05rem] font-bold tracking-[-.04em]">GlobQuantu</span><span className="mono hidden text-[.54rem] uppercase tracking-[.17em] text-muted-foreground sm:block">private wealth workspace</span></span>
         </Link>
@@ -210,7 +210,7 @@ function PublicHeader() {
 }
 
 function PublicFooter() {
-  return <footer className="border-t border-border px-5 py-8 sm:px-8 lg:px-12"><div className="mx-auto flex max-w-7xl flex-col gap-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><span className="mono">VAULTORA / INFORMATIONAL FOUNDATION</span><span>Not a trading app or an offer to invest. Funding is not available.</span></div></footer>;
+  return <footer className="border-t border-border px-5 py-8 sm:px-8 lg:px-12"><div className="mx-auto flex max-w-7xl flex-col gap-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><span className="mono">GlobQuantu / INFORMATIONAL FOUNDATION</span><span>Not a trading app or an offer to invest. Funding is not available.</span></div></footer>;
 }
 
 type PublicPageKind = "investing" | "risk" | "security";
@@ -225,13 +225,13 @@ function PublicInfoPage({ kind }: { kind: PublicPageKind }) {
       sections: [
         ["What you can expect", "A private workspace for portfolio records, account readiness, and activity when those records exist. The dashboard shows stored data; it does not manufacture a performance story."],
         ["What you will not find", "There are no recommendations, forecasts, return targets, model portfolios, or prompts to buy and sell. Any investment decision remains yours and should be considered with an appropriately qualified professional."],
-        ["Why we are building this", "Financial context is easier to respect when it is visible, sourced, and bounded. Vaultora starts with records and communication rather than transactions."],
+        ["Why we are building this", "Financial context is easier to respect when it is visible, sourced, and bounded. GlobQuantu starts with records and communication rather than transactions."],
       ],
     },
     risk: {
       eyebrow: "Risk and limitations",
       title: "A quiet interface cannot make risk disappear.",
-      intro: "Investments can lose value. Historical information, if shown in a future version of the workspace, would not predict future results. Vaultora does not promise outcomes or suitability.",
+      intro: "Investments can lose value. Historical information, if shown in a future version of the workspace, would not predict future results. GlobQuantu does not promise outcomes or suitability.",
       icon: Scale,
       sections: [
         ["Risk belongs in the decision", "Market, liquidity, credit, operational, tax, currency, and other risks can affect an investment. The right level of risk depends on a person’s circumstances, objectives, and capacity for loss."],
@@ -247,12 +247,12 @@ function PublicInfoPage({ kind }: { kind: PublicPageKind }) {
       sections: [
         ["Account access", "Registration and sign-in are handled through Clerk. Your workspace is only available to an authenticated account, and dashboard information is requested with session credentials."],
         ["Data discipline", "The dashboard is intended to display server-backed records, not estimates or demo values. We keep the interface explicit about what is present, what is missing, and what is unavailable."],
-        ["Funding is closed", "No money is accepted through account creation. Funding and withdrawals are unavailable until Vaultora completes business model, licensing, and compliance review. This is a product boundary, not a payment delay."],
+        ["Funding is closed", "No money is accepted through account creation. Funding and withdrawals are unavailable until GlobQuantu completes business model, licensing, and compliance review. This is a product boundary, not a payment delay."],
       ],
     },
   }[kind];
   const Icon = content.icon;
-  return <div className="vaultora-shell min-h-[100dvh]"><PublicHeader /><main className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:px-12 lg:pb-28"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><div className="reveal"><div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[hsl(var(--primary)/.25)] bg-[hsl(var(--primary)/.08)] text-positive"><Icon size={22} /></div><p className="eyebrow mt-8 text-positive">{content.eyebrow}</p><h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-.065em] sm:text-6xl">{content.title}</h1><p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground">{content.intro}</p><div className="mt-8 flex flex-wrap gap-3"><Link href="/sign-up" data-testid={`link-${kind}-create-account`} className="primary-button inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground">Create account <ArrowRight size={15} /></Link><Link href="/" data-testid={`link-${kind}-home`} className="soft-button inline-flex items-center rounded-lg border border-border px-4 py-3 text-sm font-semibold text-muted-foreground">Back to overview</Link></div></div><div className="space-y-4 reveal-2">{content.sections.map(([title, copy], index) => <article key={title} className="panel rounded-2xl p-6 sm:p-8"><div className="flex gap-5"><span className="mono pt-1 text-[.65rem] text-positive">0{index + 1}</span><div><h2 className="text-lg font-semibold">{title}</h2><p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{copy}</p></div></div></article>)}<div className="rounded-2xl border border-[hsl(var(--accent)/.2)] bg-[hsl(var(--accent)/.05)] p-5 text-sm leading-6 text-[hsl(43_70%_76%)]"><Info className="mb-3 text-accent" size={17} /><strong className="font-semibold">Important boundary.</strong> Account creation does not accept money. Funding is unavailable until our business model, licensing, and compliance review are complete.</div></div></div></main><PublicFooter /></div>;
+  return <div className="GlobQuantu-shell min-h-[100dvh]"><PublicHeader /><main className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:px-12 lg:pb-28"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><div className="reveal"><div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[hsl(var(--primary)/.25)] bg-[hsl(var(--primary)/.08)] text-positive"><Icon size={22} /></div><p className="eyebrow mt-8 text-positive">{content.eyebrow}</p><h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-.065em] sm:text-6xl">{content.title}</h1><p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground">{content.intro}</p><div className="mt-8 flex flex-wrap gap-3"><Link href="/sign-up" data-testid={`link-${kind}-create-account`} className="primary-button inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground">Create account <ArrowRight size={15} /></Link><Link href="/" data-testid={`link-${kind}-home`} className="soft-button inline-flex items-center rounded-lg border border-border px-4 py-3 text-sm font-semibold text-muted-foreground">Back to overview</Link></div></div><div className="space-y-4 reveal-2">{content.sections.map(([title, copy], index) => <article key={title} className="panel rounded-2xl p-6 sm:p-8"><div className="flex gap-5"><span className="mono pt-1 text-[.65rem] text-positive">0{index + 1}</span><div><h2 className="text-lg font-semibold">{title}</h2><p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{copy}</p></div></div></article>)}<div className="rounded-2xl border border-[hsl(var(--accent)/.2)] bg-[hsl(var(--accent)/.05)] p-5 text-sm leading-6 text-[hsl(43_70%_76%)]"><Info className="mb-3 text-accent" size={17} /><strong className="font-semibold">Important boundary.</strong> Account creation does not accept money. Funding is unavailable until our business model, licensing, and compliance review are complete.</div></div></div></main><PublicFooter /></div>;
 }
 
 function PortfolioChart({ dashboard, timeframe }: { dashboard: Dashboard; timeframe: Timeframe }) {
