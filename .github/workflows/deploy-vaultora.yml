@@ -42,6 +42,7 @@ jobs:
           PORT: 20101
           BASE_PATH: /GlobQuantu/
           API_PORT: 8080
+          VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
